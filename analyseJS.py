@@ -4,7 +4,7 @@ from urllib.parse import urljoin
 import re
 
 def jsScanner(url):
-    # Identify website for analysis.
+    # Get website for analysis.
     response = requests.get(url)
     soup = BeautifulSoup(response.content, 'lxml')
 
@@ -18,8 +18,7 @@ def jsScanner(url):
     jsResponse = requests.get(src)
     # print(jsResponse.text)
 
-    # Find keywords such as 'keyup' and 'keydown', or letters encapsulated by ''.
-    # test = 'fetc the "w"ater"'
+    # Find keywords such as 'keyup' and 'keydown'.
     pattern = r'(keyDown|keyUp|keyPress|onkeydown|onkeyup|onkeypress)'
     matches = ''
     matches = re.findall(pattern, jsResponse.text)
@@ -28,4 +27,5 @@ def jsScanner(url):
     else:
         print('No match')
 
-jsScanner('https://week-08-iota.vercel.app/')
+url = input('Enter the website you would like to be scanned: ')
+jsScanner(url)
